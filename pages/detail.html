@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartment Details</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+    <header>
+        <div class="collapse bg-dark" id="navbarHeader">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-8 col-md-7 py-4">
+                <h4 class="text-white">About</h4>
+                <p class="text-muted">Add some information about the album below, the author, or any other background context. Make it a few sentences long so folks can pick up some informative tidbits. Then, link them off to some social networking sites or contact information.</p>
+              </div>
+              <div class="col-sm-4 offset-md-1 py-4">
+                <h4 class="text-white">Contact</h4>
+                <ul class="list-unstyled">
+                  <li><a href="{% url 'addPost'%}">(ADD POST)</a></li>
+                  <a href="{% url 'login'%}">(LOGIN)</a>
+                  <li><a href="{% url 'signup'%}">(SIGNUP)</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="navbar navbar-light bg-light  shadow-sm">
+          <div class="container">
+            <a href="#" class="navbar-brand d-flex align-items-center">
+              <img src="{% static 'img/Residence Logo-01.png' %}" alt="Girl in a jacket" style="width:100px;height:50px;"><br>
+              <!-- <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg> -->
+              <strong>Easy Accomodation Service</strong>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
+        </div>
+      </header>
+      <div class="p-2">
+          <a class="btn btn-outline-info " href="{% url 'home'%}">&larr; Home</a>
+        <!-- <input class="btn btn-outline-info " style="width: 150px ;" type="submit" value="&larr; Home"> -->
+        <!-- <button type="button" class="btn btn-outline-info"> &larr; Home </button> -->
+      </div>
+      
+<h1 class="p-2 text-center">Welcome to {{ product.apartment_name}} Apartment</h1>
+
+
+
+<img src="{{product.apartment_img1.url}}" class="img-fluid w-100 p-2" style="height: 500px;" alt="...">
+<br>
+<h5 class="p-2 text-center">Interior View </h5>
+<hr>
+<div class="container pt-5">
+    <div class="row mb-3">
+        <div class="col-md-4 themed-grid-col"><img src="{{product.apartment_img1.url}}" class="rounded float-start" style="height: 300px;width: 300px;" alt="..."></div>
+        <div class="col-md-4 themed-grid-col"><img src="{{product.apartment_img2.url}}" class="rounded float-start" style="height: 300px;width: 300px;" alt="..."></div>
+        <div class="col-md-4 themed-grid-col"><img src="{{product.apartment_img3.url}}" class="rounded float-start" style="height: 300px;width: 300px;" alt="..."></div>
+        <div class="col-md-4 themed-grid-col pt-2"><img src="{{product.apartment_img4.url}}" class="rounded float-start" style="height: 300px;width: 300px;" alt="..."></div>
+        <div class="col-md-4 themed-grid-col pt-2"><img src="{{product.apartment_img5.url}}" class="rounded float-start" style="height: 300px;width: 300px;" alt="..."></div>
+        <div class="col-md-4 themed-grid-col pt-2"><img src="{{product.apartment_img2.url}}" class="rounded float-start" style="height: 300px;width: 300px;" alt="..."></div>
+      </div>
+</div>
+
+<h5 class="p-2 text-center">Book This Apartment for ${{ product.apartment_price}} </h5>
+<!-- <a class="btn btn-outline-success" href="{% url 'post'%}">Booking</a> -->
+<br>
+
+<form action="" method="post">
+    {% csrf_token %} 
+    <div class="text-center pb-2">
+        <input class="btn btn-outline-success " style="width: 150px ;" type="submit" value="Book Now">
+    </div>
+    <div class="text-center">
+        <!-- Button trigger modal -->
+
+        <!-- <input class="btn btn-outline-primary d-none " id="details" type="submit" value="Owner Details"> -->
+        <button type="button" id="details" class="btn btn-primary btn-outline-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Owner Details
+          </button>
+    </div>
+    
+</form>
+<br>
+{% if product.book == True %}
+    <p>success</p>
+    <script>
+        alert("Booking successful  click on Owner details")
+        var element = document.getElementById('details');
+        element.classList.remove('d-none');
+    </script>
+    
+
+    
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Owner Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <p>{{ product.apartment_owner}}</p>
+            <p>{{ product.apartment_owner.email}}</p>
+            <p>{{ product.apartment_owner.tel_no}}</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+{% endif %}
+<br>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+</body>
+</html>
+
+
+
+
+

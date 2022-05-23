@@ -1,0 +1,85 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        .container {
+  max-width: 960px;
+}
+    </style>
+</head>
+<body>
+    <main>
+        <div class="py-5 text-center">
+          <img class="d-block mx-auto mb-4" src="{% static 'img/Residence Logo-01.png' %}" alt="" width="72" height="57">
+          <h2>Sign Up</h2>
+          
+        </div>
+    <form action="signup" method="post">
+        {% csrf_token %}
+        <div class="container">
+
+            <div class="row g-3">
+                <div class="col-sm-6">
+                  <label for="firstName" class="form-label">First name</label>
+                  <input type="text" name="firstname" class="form-control" id="firstName" placeholder="" value="" required>
+                  <div class="invalid-feedback">
+                    Valid first name is required.
+                  </div>
+                </div>
+    
+                <div class="col-sm-6">
+                  <label for="lastName" class="form-label">Last name</label>
+                  <input type="text" name="lastname" class="form-control" id="lastName" placeholder="" value="" required>
+                  <div class="invalid-feedback">
+                    Valid last name is required.
+                  </div>
+                </div>
+    
+                <div class="col-12">
+                  <label for="username" class="form-label">Username</label>
+                  <div class="input-group has-validation">
+                    <span class="input-group-text">@</span>
+                    <input type="text" name="username" class="form-control" id="username" placeholder="Username" required>
+                  <div class="invalid-feedback">
+                      Your username is required.
+                    </div>
+                  </div>
+                </div> 
+                <div class="col-12">
+                    <label for="email" class="form-label">Email <span class="text-muted">(Optional)</span></label>
+                    <input type="email" name="email" class="form-control" id="email" placeholder="you@example.com">
+                    <div class="invalid-feedback">
+                      Please enter a valid email address for shipping updates.
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <label for="password1" class="form-label">Password <span class="text-muted">(Required)</span></label>
+                    <input type="text" name="password1" class="form-control" id="email" placeholder="enter password">
+                    
+                  </div>
+                  <div class="col-12">
+                    <label for="password" class="form-label">Confirm password <span class="text-muted">(Required)</span></label>
+                    <input type="text" name="password2" class="form-control" id="email" placeholder="Confirm password">
+                    <div class="invalid-feedback">
+                      Please enter a valid email address for shipping updates.
+                    </div>
+                  </div>
+            <!--Personal--> 
+            <!-- {{ form.as_p }} -->
+            <input type="submit" class="mb-3" value="register">
+            {% for i in messages %}
+            <p>{{ i }}</p>
+        {% endfor %}
+        </div>
+        
+    </form>
+    </main>
+</body>
+
+</html>
