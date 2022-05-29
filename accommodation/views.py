@@ -1,6 +1,8 @@
 from dataclasses import field
 from django.shortcuts import get_object_or_404, render
 from django.http import HttpResponse
+
+from accommodation.serializers import HousesSerializers
 from .forms import RegisterUserform
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -9,6 +11,9 @@ from django.views.generic import ListView,DetailView,CreateView,UpdateView
 from .models import Apartment,Booking_details
 from renting.models import Houses
 from django.contrib.auth.models import User
+from django.http import JsonResponse
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 # Create your views here.
 """ def home(request):
@@ -128,5 +133,20 @@ def post(request):
         return HttpResponse('')
     return render(request,'booking.html')
 
+
+@api_view(['GET'])
+def api(request):
+    api_urls = {
+        'List':'/task-list/',
+
+    }
+
+    return Response(api_urls)
+
+@api_view(['GET'])
+def List(request):
+    List = Houses.objects.all()
+    serializer = HousesSerializers(List,many=True)
+    return Response(serializer.data)
 
         

@@ -14,5 +14,7 @@ urlpatterns = [
     path('logout',views.logoutUser,name='logout'),
     #path('booking',views.book.as_view(),name='book'),
     path('post',views.post,name='post'),
+    path('api',views.api,name='api'),
+    path('api/house-list/',views.List,name='List'),
 
 ]
